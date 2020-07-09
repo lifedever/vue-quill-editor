@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+git add . && git commit -m 'coding'
 yarn demo
 yarn version
 git add . && git commit -m 'coding'
