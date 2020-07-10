@@ -131,7 +131,7 @@
                     this.$emit('textChange', {delta, oldDelta, source})
                 });
                 this.quill.on('selection-change', (range, oldRange, source) =>{
-                    this.$emit('selectionChange', {delta, oldDelta, source})
+                    this.$emit('selectionChange', {range, oldRange, source})
                 })
                 this.quill.on('editor-change', (eventName, ...args)=>{
                     this.$emit('editorChange', {eventName, args})
