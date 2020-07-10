@@ -21,7 +21,11 @@
                               :image="imageConfig"
                               height="300"
                               :auto-height="false"
-                              v-model="content"></quill-editor>
+                              v-model="content">
+                    <h1>标题1</h1>
+                    <h1>标题2</h1>
+                    <h1>标题3</h1>
+                </quill-editor>
             </div>
             <div style="flex: 1; padding-left: 10px;    word-break: break-all;">
                 <div style=" background: #fff; padding: 12px;" v-html="content"></div>
@@ -42,7 +46,7 @@
                     multiple: false,
                     serverUrl: 'http://localhost:12388/api/facade/open/general/edit/upload'
                 },
-                content: `<h1>标题一标题一</h1><h2>标题二标题二</h2><h3>标题三标题三</h3><h4>标题四标题四</h4><h5>标题五标题五</h5><h6>标题六标题六</h6>`
+                content: ''
             }
         },
         watch: {

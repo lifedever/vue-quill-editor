@@ -4,6 +4,7 @@
         <div ref="editor"
              class="vue-quill-editor"
              :style="style">
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -104,6 +105,7 @@
             },
             initQuill() {
                 Quill.register('modules/imageResize', ImageResize);
+
                 this.quill = new Quill(this.$refs['editor'], {
                     modules: {
                         toolbar: {
@@ -120,12 +122,7 @@
                 });
 
                 this.$nextTick(_ => {
-                    if (this.value) {
-                        this.quill.root.dataset.placeholder = '';
-                        this.quill.setHtml(this.value)
-                    } else {
-                        this.quill.root.dataset.placeholder = this.placeholder
-                    }
+                    this.$emit('input', this.getHtml())
                 })
 
                 this.bindEvents();
