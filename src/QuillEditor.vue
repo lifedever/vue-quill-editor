@@ -24,7 +24,6 @@
                     fileName: 'file',
                     withCredentials: true,
                     multiple: true,
-                    width: '100%'
                 }
             }
         },
