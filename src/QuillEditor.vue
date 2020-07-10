@@ -122,7 +122,13 @@
                 });
 
                 this.$nextTick(_ => {
-                    this.$emit('input', this.getHtml())
+                    if (this.value) {
+                        this.quill.root.dataset.placeholder = '';
+                        this.quill.setHtml(this.value)
+                    } else {
+                        this.quill.root.dataset.placeholder = this.placeholder
+                    }
+                    this.$emit('input', this.quill.getHtml())
                 })
 
                 this.bindEvents();

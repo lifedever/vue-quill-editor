@@ -23,8 +23,17 @@
                               :auto-height="false"
                               v-model="content">
                     <h1>标题1</h1>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
                     <h1>标题2</h1>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
                     <h1>标题3</h1>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
                 </quill-editor>
             </div>
             <div style="flex: 1; padding-left: 10px;    word-break: break-all;">
