@@ -3,7 +3,7 @@
     "version": "1.0.5",
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build --target lib --name vueQuillEditor ./src/index.js",
+        "build": "vue-cli-service build --target lib --name vueQuillEditor index.js",
         "demo": "vue-cli-service build"
     },
     "dependencies": {

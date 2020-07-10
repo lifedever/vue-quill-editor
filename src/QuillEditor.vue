@@ -52,7 +52,7 @@
                         ['blockquote', 'code-block'],
                         [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
                         [{'align': []}],
-                        ['clean']
+                        ['clean'],
                     ]
                 }
             },
@@ -79,8 +79,8 @@
         computed: {
             style() {
                 return {
-                    height: this.autoHeight? undefined: this.height + 'px',
-                    minHeight: this.autoHeight? this.height + 'px': undefined
+                    height: this.autoHeight ? undefined : this.height + 'px',
+                    minHeight: this.autoHeight ? this.height + 'px' : undefined
                 }
             }
         },
@@ -128,7 +128,14 @@
             bindEvents() {
                 this.quill.on('text-change', (delta, oldDelta, source) => {
                     this.$emit('input', this.quill.getHtml())
+                    this.$emit('textChange', {delta, oldDelta, source})
                 });
+                this.quill.on('selection-change', (range, oldRange, source) =>{
+                    this.$emit('selectionChange', {delta, oldDelta, source})
+                })
+                this.quill.on('editor-change', (eventName, ...args)=>{
+                    this.$emit('editorChange', {eventName, args})
+                })
             },
             handleImage() {
                 console.log('选择图片进行上传')
@@ -175,11 +182,36 @@
                     xhr.send(formData);
                 })
             },
+            getEditor() {
+                return this.quill
+            },
             getHtml() {
                 return this.quill.getHtml()
             },
             setHtml(content) {
                 this.quill.setHtml(content)
+            },
+            getText() {
+                return this.quill.getText()
+            },
+            getContents() {
+                return this.quill.getContents()
+            },
+            getLength() {
+                return this.quill.getLength()
+            },
+            blur() {
+                this.quill.blur()
+            },
+            focus() {
+                this.quill.focus()
+            },
+            /**
+             * 是否获取焦点
+             * @returns {boolean}
+             */
+            hasFocus() {
+                return this.quill.hasFocus()
             }
         },
         beforeDestroy() {

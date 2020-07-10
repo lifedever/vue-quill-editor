@@ -1,11 +1,11 @@
 vue-quill-editor
 ----
-# USAGE
+# 使用方法
 ```shell script
 yarn add @gefangshuai/vue-quill-editor
 ```
 
-# OPTIONS
+# 参数
 
 1. value (v-model): 绑定文本内容
 2. placeholder: 无内容时的文本提示
@@ -37,9 +37,20 @@ yarn add @gefangshuai/vue-quill-editor
 6. autoHeight: 编辑器高度随内容自适配，默认true。
 7. height: 编辑器初始化时的高度，默认'200px'。
 
-# METHODS
+# 事件
+1. textChange: 监听内容发生变化
+2. selectionChange: 监听内容选择发生变化
+3. editorChange: 监听编辑器的所有变化
+
+# 方法
 
 1. getHtml(): String
     返回编辑器内容
 2. setHtml(content)： 
     为编辑器赋值
+3. getText(): 获取纯文本
+4. getContents(): 获取内容对象
+5. getLength(): 获取内容长度
+6. blur(): 使编辑器失去焦点
+7. focus(): 使编辑器获取焦点
+8. hasFocus(): 判断编辑器是否获取焦点
