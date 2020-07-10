@@ -4,7 +4,18 @@ vue-quill-editor
 ```shell script
 yarn add @gefangshuai/vue-quill-editor
 ```
-
+```html
+<quill-editor :read-only="readOnly"
+              ref="editor"
+              :image="imageConfig"
+              height="300"
+              :auto-height="false"
+              v-model="content">
+    <h1>标题1</h1>
+    <h1>标题2</h1>
+    <h1>标题3</h1>
+</quill-editor>
+```
 # 参数
 
 1. value (v-model): 绑定文本内容
