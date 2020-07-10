@@ -9,7 +9,10 @@
         </div>
         <div style="width: 1200px; margin-top: 10px; display: flex; flex-direction: row;">
             <div style="flex: 1;">
-                <quill-editor :read-only="readOnly" :image="imageConfig" v-model="content"></quill-editor>
+                <quill-editor :read-only="readOnly"
+                              :image="imageConfig"
+                              :auto-height="false"
+                              v-model="content"></quill-editor>
             </div>
             <div style="flex: 1; padding-left: 10px;    word-break: break-all;">
                 <div style=" background: #fff; padding: 12px;" v-html="content"></div>

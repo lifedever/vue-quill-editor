@@ -1,7 +1,7 @@
 <template>
     <div>
         <div ref="toolbar"></div>
-        <div ref="editor" class="vue-quill-editor">
+        <div ref="editor" class="vue-quill-editor" :style="style">
         </div>
     </div>
 </template>
@@ -46,24 +46,40 @@
                         [{'header': [1, 2, 3, 4, 5, false]}],
                         [{'color': []}, {'background': []}],          // dropdown with defaults from theme
                         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                        ['link'],
-                        ['image'],
+                        ['link', 'image'],
                         [{'list': 'ordered'}, {'list': 'bullet'}],
                         ['blockquote', 'code-block'],
                         [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
                         [{'align': []}],
+                        ['clean']
                     ]
                 }
             },
             image: {
                 type: Object
             },
-            readOnly: Boolean
+            readOnly: Boolean,
+            autoHeight: {
+                type: Boolean,
+                default: true
+            },
+            height: {
+                type: [Number, String],
+                default: 200
+            }
         },
         watch: {
             readOnly() {
                 if (this.quill) {
                     this.quill.enable(!this.readOnly);
+                }
+            }
+        },
+        computed: {
+            style() {
+                return {
+                    height: this.autoHeight? undefined: this.height + 'px',
+                    minHeight: this.autoHeight? this.height + 'px': undefined
                 }
             }
         },
