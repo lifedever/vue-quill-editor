@@ -1,7 +1,9 @@
 <template>
     <div>
         <div ref="toolbar"></div>
-        <div ref="editor" class="vue-quill-editor" :style="style">
+        <div ref="editor"
+             class="vue-quill-editor"
+             :style="style">
         </div>
     </div>
 </template>
@@ -10,6 +12,7 @@
     import Quill from 'quill'
     import 'quill/dist/quill.core.css'
     import './style.less'
+    import ImageResize from 'quill-image-resize';
 
     export default {
         name: "QuillEditor",
@@ -20,7 +23,8 @@
                     serverUrl: undefined,
                     fileName: 'file',
                     withCredentials: true,
-                    multiple: true
+                    multiple: true,
+                    width: '100%'
                 }
             }
         },
@@ -100,6 +104,7 @@
                 };
             },
             initQuill() {
+                Quill.register('modules/imageResize', ImageResize);
                 this.quill = new Quill(this.$refs['editor'], {
                     modules: {
                         toolbar: {
@@ -107,7 +112,8 @@
                             handlers: {
                                 'image': this.imageConfig.serverUrl ? this.handleImage : undefined
                             }
-                        }
+                        },
+                        imageResize: {}
                     },
                     theme: 'snow',
                     placeholder: this.placeholder,
