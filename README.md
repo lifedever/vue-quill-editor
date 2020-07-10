@@ -27,8 +27,9 @@ yarn add @gefangshuai/vue-quill-editor
     ```json
     {
         "serverUrl": "图片上传的后台接收地址",
-        "fileName": "请求参数，默认：'file'",
-        "withCredentials": "是否跨域，默认true"
+        "fileName": "请求参数，默认 'file'",
+        "withCredentials": "是否跨域，默认 true",
+        "multiple": "是否允许一次上传多张图片，默认 true"
     }
     ```
     如果不配置，则默认为base64图片插入到编辑器

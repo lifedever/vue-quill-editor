@@ -19,7 +19,8 @@
                 imageConfig: {
                     serverUrl: undefined,
                     fileName: 'file',
-                    withCredentials: true
+                    withCredentials: true,
+                    multiple: true
                 }
             }
         },
@@ -133,6 +134,7 @@
                 console.log('选择图片进行上传')
                 const input = document.createElement('input');
                 input.setAttribute('type', 'file');
+                input.setAttribute('multiple', "true");
                 input.setAttribute('accept', 'image/*');
                 input.click();
 
