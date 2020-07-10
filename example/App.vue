@@ -19,7 +19,7 @@
                 <quill-editor :read-only="readOnly"
                               ref="editor"
                               :image="imageConfig"
-                              height="400"
+                              height="300"
                               :auto-height="false"
                               v-model="content"></quill-editor>
             </div>
@@ -39,6 +39,7 @@
             return {
                 readOnly: false,
                 imageConfig: {
+                    multiple: false,
                     serverUrl: 'http://localhost:12388/api/facade/open/general/edit/upload'
                 },
                 content: `<h1>标题一标题一</h1><h2>标题二标题二</h2><h3>标题三标题三</h3><h4>标题四标题四</h4><h5>标题五标题五</h5><h6>标题六标题六</h6>`

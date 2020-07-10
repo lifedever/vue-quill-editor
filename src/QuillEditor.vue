@@ -130,10 +130,10 @@
                     this.$emit('input', this.quill.getHtml())
                     this.$emit('textChange', {delta, oldDelta, source})
                 });
-                this.quill.on('selection-change', (range, oldRange, source) =>{
+                this.quill.on('selection-change', (range, oldRange, source) => {
                     this.$emit('selectionChange', {range, oldRange, source})
                 })
-                this.quill.on('editor-change', (eventName, ...args)=>{
+                this.quill.on('editor-change', (eventName, ...args) => {
                     this.$emit('editorChange', {eventName, args})
                 })
             },
@@ -141,14 +141,15 @@
                 console.log('选择图片进行上传')
                 const input = document.createElement('input');
                 input.setAttribute('type', 'file');
-                input.setAttribute('multiple', "true");
+                if (this.imageConfig.multiple) {
+                    input.setAttribute('multiple', "true");
+                }
                 input.setAttribute('accept', 'image/*');
                 input.click();
 
                 input.onchange = async () => {
-                    const file = input.files[0];
                     const range = this.quill.getSelection(true);
-                    this.uploadImage(file).then(items => {
+                    this.uploadImage(this.imageConfig.multiple ? input.files : input.files[0]).then(items => {
                         items.forEach(image => {
                             this.quill.insertEmbed(range.index, 'image', image);
                             this.quill.setSelection(range.index + 1);
@@ -156,11 +157,17 @@
                     })
                 }
             },
-            uploadImage(file) {
+            uploadImage(files) {
                 return new Promise((resolve, reject) => {
                     const formData = new FormData();
-                    formData.append(this.imageConfig.fileName, file);
-                    const xhr = new XMLHttpRequest()
+                    if (this.imageConfig.multiple) {
+                        files.forEach(file => {
+                            formData.append(this.imageConfig.fileName, file);
+                        })
+                    } else {
+                        formData.append(this.imageConfig.fileName, files);
+                    }
+                    const xhr = new XMLHttpRequest();
                     xhr.open('POST', this.imageConfig.serverUrl, true);
                     if (this.imageConfig.withCredentials) {
                         xhr.withCredentials = true;
