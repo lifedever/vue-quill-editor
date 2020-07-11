@@ -36,8 +36,8 @@
                     <p><br></p>
                 </quill-editor>
             </div>
-            <div style="flex: 1; padding-left: 10px;    word-break: break-all;">
-                <div style=" background: #fff; padding: 12px;" v-html="content"></div>
+            <div style="flex: 1; padding-left: 10px;    word-break: break-all;" class="ql-container">
+                <div style=" background: #fff; padding: 12px;" class="ql-editor" v-html="content"></div>
             </div>
         </div>
     </div>
