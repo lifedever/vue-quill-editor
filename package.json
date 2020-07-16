@@ -1,6 +1,6 @@
 {
     "name": "@gefangshuai/vue-quill-editor",
-    "version": "1.0.15",
+    "version": "1.0.16",
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build --target lib --name vueQuillEditor index.js",
