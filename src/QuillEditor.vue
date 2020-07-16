@@ -111,8 +111,7 @@
             },
             initQuill() {
                 Quill.register('modules/imageResize', ImageResize);
-
-                this.quill = new Quill(this.$refs['editor'], {
+                let config = {
                     modules: {
                         toolbar: {
                             container: this.toolbar,  // Selector for toolbar container
@@ -125,8 +124,9 @@
                     theme: 'snow',
                     placeholder: this.placeholder,
                     readOnly: this.readOnly
-                });
-
+                }
+                this.quill = new Quill(this.$refs['editor'], config);
+                console.log('init quill config: ', config)
                 this.$nextTick(_ => {
                     if (this.value) {
                         this.quill.setHtml(this.value)
