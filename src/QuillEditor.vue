@@ -129,10 +129,7 @@
 
                 this.$nextTick(_ => {
                     if (this.value) {
-                        this.quill.root.dataset.placeholder = '';
                         this.quill.setHtml(this.value)
-                    } else {
-                        this.quill.root.dataset.placeholder = this.placeholder
                     }
                     this.$emit('input', this.quill.getHtml())
                 })
@@ -141,12 +138,13 @@
             },
             bindEvents() {
                 this.quill.on('text-change', (delta, oldDelta, source) => {
+                    console.log('text-change：', this.getText())
                     let length = this.getLength()
                     if (this.maxLength && length > this.maxLength) {
                         this.quill.deleteText(this.maxLength, length);
                     }
 
-                    this.textLength = this.getLength()
+                    this.textLength = this.getLength();
                     this.$emit('input', this.quill.getHtml());
                     this.$emit('textChange', {delta, oldDelta, source})
                 });
