@@ -6,6 +6,9 @@
              :style="style">
             <slot></slot>
         </div>
+        <div class="ql-counter-desc">
+            已输入 {{textLength}} 字
+        </div>
     </div>
 </template>
 
@@ -25,7 +28,8 @@
                     fileName: 'file',
                     withCredentials: true,
                     multiple: true,
-                }
+                },
+                textLength: 0
             }
         },
         created() {
@@ -36,6 +40,8 @@
             this.initQuill()
         },
         props: {
+            maxLength: Number,
+            showCounter: Boolean,
             value: {
                 type: String,
                 default: ''
@@ -130,12 +136,18 @@
                     }
                     this.$emit('input', this.quill.getHtml())
                 })
-
+                this.textLength = this.getLength()
                 this.bindEvents();
             },
             bindEvents() {
                 this.quill.on('text-change', (delta, oldDelta, source) => {
-                    this.$emit('input', this.quill.getHtml())
+                    let length = this.getLength()
+                    if (this.maxLength && length > this.maxLength) {
+                        this.quill.deleteText(this.maxLength, length);
+                    }
+
+                    this.textLength = this.getLength()
+                    this.$emit('input', this.quill.getHtml());
                     this.$emit('textChange', {delta, oldDelta, source})
                 });
                 this.quill.on('selection-change', (range, oldRange, source) => {
@@ -213,7 +225,7 @@
                 return this.quill.getContents()
             },
             getLength() {
-                return this.quill.getLength()
+                return this.quill.getLength() - 1
             },
             blur() {
                 this.quill.blur()

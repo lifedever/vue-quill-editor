@@ -13,10 +13,14 @@
             <button @click="callMethod('blur')">失去焦点</button>
             <button @click="callMethod('focus')">获取焦点</button>
             <button @click="callMethod('hasFocus')">是否获取焦点</button>
+            <button @click="handleLimitCount" v-if="maxLength">取消字数限制</button>
+            <button @click="handleLimitCount" v-else>限制100字长度输入</button>
         </div>
         <div style="width: 1200px; margin-top: 10px; display: flex; flex-direction: row;">
             <div style="flex: 1;">
                 <quill-editor :read-only="readOnly"
+                              :max-length="maxLength"
+                              show-counter
                               ref="editor"
                               :image="imageConfig"
                               height="300"
@@ -50,6 +54,7 @@
         components: {},
         data() {
             return {
+                maxLength: undefined,
                 readOnly: false,
                 imageConfig: {
                     multiple: false,
@@ -68,6 +73,13 @@
                 alert(obj)
                 console.log(obj)
             },
+            handleLimitCount() {
+                if (this.maxLength) {
+                    this.maxLength = undefined
+                }else{
+                    this.maxLength = 100
+                }
+            }
         }
     }
 </script>
