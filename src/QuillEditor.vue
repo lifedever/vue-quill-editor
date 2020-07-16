@@ -118,7 +118,7 @@
                 let config = {
                     modules: {
                         toolbar: {
-                            container: this.$refs['toolbar'],  // Selector for toolbar container
+                            container: this.toolbar,  // Selector for toolbar container
                             handlers: {
                                 'image': this.imageConfig.serverUrl ? this.handleImage : undefined
                             }
