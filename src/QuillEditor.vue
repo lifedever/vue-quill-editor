@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div ref="toolbar"></div>
         <div ref="editor"
              class="vue-quill-editor"
              :style="style">
@@ -40,6 +39,10 @@
             this.initQuill()
         },
         props: {
+            borderColor: {
+                type: String,
+                default: '#eee'
+            },
             maxLength: Number,
             showCounter: Boolean,
             value: {
@@ -90,7 +93,8 @@
             style() {
                 return {
                     height: this.autoHeight ? undefined : this.height + 'px',
-                    minHeight: this.autoHeight ? this.height + 'px' : undefined
+                    minHeight: this.autoHeight ? this.height + 'px' : undefined,
+                    borderColor: this.borderColor
                 }
             }
         },
@@ -114,7 +118,7 @@
                 let config = {
                     modules: {
                         toolbar: {
-                            container: this.toolbar,  // Selector for toolbar container
+                            container: this.$refs['toolbar'],  // Selector for toolbar container
                             handlers: {
                                 'image': this.imageConfig.serverUrl ? this.handleImage : undefined
                             }
@@ -135,6 +139,12 @@
                 })
                 this.textLength = this.getLength()
                 this.bindEvents();
+
+
+                this.$nextTick(_ => {
+                    // init toolbar style
+                    this.$el.querySelector('.ql-toolbar.ql-snow').style.borderColor = this.borderColor
+                })
             },
             bindEvents() {
                 this.quill.on('text-change', (delta, oldDelta, source) => {
