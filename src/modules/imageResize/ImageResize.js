@@ -12,7 +12,8 @@ const knownModules = {DisplaySize, Toolbar, Resize};
  * (Works on Chrome, Edge, Safari and replaces Firefox's native resize behavior)
  * @see https://quilljs.com/blog/building-a-custom-module/
  */
-export default class ImageResize {
+
+class ImageResize {
 
     constructor(quill, options = {}) {
         // save the quill reference and options
@@ -68,7 +69,6 @@ export default class ImageResize {
 
         this.onUpdate();
     };
-
     onUpdate = () => {
         this.repositionElements();
         this.modules.forEach(
@@ -77,7 +77,6 @@ export default class ImageResize {
             },
         );
     };
-
     removeModules = () => {
         this.modules.forEach(
             (module) => {
@@ -87,7 +86,6 @@ export default class ImageResize {
 
         this.modules = [];
     };
-
     handleClick = (evt) => {
         if(this.quill.container.classList.contains('ql-disabled')){     // 只读模式
             return;
@@ -108,7 +106,6 @@ export default class ImageResize {
             this.hide();
         }
     };
-
     show = (img) => {
         if (this.quill.options.readOnly) {      // readonly
             console.log('readonly')
@@ -209,3 +206,5 @@ export default class ImageResize {
     };
 }
 
+
+export default ImageResize

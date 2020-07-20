@@ -69,7 +69,7 @@
         data() {
             return {
                 maxLength: undefined,
-                readOnly: true,
+                readOnly: false,
                 imageConfig: {
                     multiple: false,
                     serverUrl: 'http://localhost:12388/api/facade/open/general/edit/upload'

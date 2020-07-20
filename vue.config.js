@@ -1,5 +1,5 @@
 module.exports = {
-    outputDir: 'docs',
+    outputDir: 'lib',
     publicPath: process.env.NODE_ENV === 'production'
         ? './'
         : './',
