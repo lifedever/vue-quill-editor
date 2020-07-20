@@ -105,13 +105,6 @@
                 if (this.imageConfig.serverUrl) {
                     console.log('服务器相应图片上传的格式应为：', {"errno": 0, "data": ["imgurl1", "imgurl2"]})
                 }
-                Quill.prototype.getHtml = () => {
-                    return this.$refs['editor'].querySelector('.ql-editor').innerHTML
-                }
-
-                Quill.prototype.setHtml = html => {
-                    this.$refs['editor'].querySelector('.ql-editor').innerHTML = html;
-                };
             },
             initQuill() {
                 Quill.register('modules/imageResize', ImageResize);
@@ -133,13 +126,14 @@
                 console.log('init quill config: ', config)
                 this.$nextTick(_ => {
                     if (this.value) {
-                        this.quill.setHtml(this.value)
+                        this.setHtml(this.value)
                     }
-                    this.$emit('input', this.quill.getHtml())
+                    this.$emit('input', this.getHtml())
                 })
                 this.textLength = this.getLength()
                 this.bindEvents();
 
+                console.log('editor container', this.quill.container)
 
                 this.$nextTick(_ => {
                     // init toolbar style
@@ -148,14 +142,15 @@
             },
             bindEvents() {
                 this.quill.on('text-change', (delta, oldDelta, source) => {
-                    console.log('text-change：', this.getText())
+                    let text = this.getText()
+                    let html = this.getHtml()
                     let length = this.getLength()
                     if (this.maxLength && length > this.maxLength) {
                         this.quill.deleteText(this.maxLength, length);
                     }
 
                     this.textLength = this.getLength();
-                    this.$emit('input', this.quill.getHtml());
+                    this.$emit('input', html);
                     this.$emit('textChange', {delta, oldDelta, source})
                 });
                 this.quill.on('selection-change', (range, oldRange, source) => {
@@ -221,10 +216,10 @@
                 return this.quill
             },
             getHtml() {
-                return this.quill.getHtml()
+                return this.quill.container.firstChild.innerHTML
             },
             setHtml(content) {
-                this.quill.setHtml(content)
+                this.quill.container.firstChild.innerHTML = content;
             },
             getText() {
                 return this.quill.getText()

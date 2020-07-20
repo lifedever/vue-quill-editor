@@ -18,30 +18,47 @@
         </div>
         <div style="width: 1200px; margin-top: 10px; display: flex; flex-direction: row;">
             <div style="flex: 1;">
-                <quill-editor :read-only="readOnly"
-                              :max-length="maxLength"
-                              show-counter
-                              ref="editor"
-                              :image="imageConfig"
-                              height="300"
-                              :auto-height="false"
-                              v-model="content">
-                    <h1>标题1</h1>
-                    <p><br></p>
-                    <p><br></p>
-                    <p><br></p>
-                    <h1>标题2</h1>
-                    <p><br></p>
-                    <p><br></p>
-                    <p><br></p>
-                    <h1>标题3</h1>
-                    <p><br></p>
-                    <p><br></p>
-                    <p><br></p>
-                </quill-editor>
+                <div>
+                    <quill-editor :read-only="readOnly"
+                                  :max-length="maxLength"
+                                  show-counter
+                                  ref="editor"
+                                  :image="imageConfig"
+                                  height="100"
+                                  :auto-height="false"
+                                  v-model="item.text1">
+                    </quill-editor>
+                </div>
+                <div>
+                    <quill-editor :read-only="readOnly"
+                                  :max-length="maxLength"
+                                  show-counter
+                                  ref="editor"
+                                  :image="imageConfig"
+                                  height="100"
+                                  :auto-height="false"
+                                  v-model="item.text2">
+                    </quill-editor>
+                </div>
+                <div>
+                    <quill-editor :read-only="readOnly"
+                                  :max-length="maxLength"
+                                  show-counter
+                                  ref="editor"
+                                  :image="imageConfig"
+                                  height="100"
+                                  :auto-height="false"
+                                  v-model="item.text3">
+                    </quill-editor>
+                </div>
             </div>
             <div style="flex: 1; padding-left: 10px;    word-break: break-all;" class="ql-container">
-                <div style=" background: #fff; padding: 12px;" class="ql-editor" v-html="content"></div>
+                <p>第一个编辑器内容</p>
+                <div style=" background: #fff; padding: 12px;" class="ql-editor" v-html="item.text1"></div>
+                <p>第二个编辑器内容</p>
+                <div style=" background: #fff; padding: 12px;" class="ql-editor" v-html="item.text2"></div>
+                <p>第三个编辑器内容</p>
+                <div style=" background: #fff; padding: 12px;" class="ql-editor" v-html="item.text3"></div>
             </div>
         </div>
     </div>
@@ -60,7 +77,12 @@
                     multiple: false,
                     serverUrl: 'http://localhost:12388/api/facade/open/general/edit/upload'
                 },
-                content: ''
+                content: '',
+                item: {
+                    text1: '123',
+                    text2: '456',
+                    text3: '789'
+                }
             }
         },
         watch: {
