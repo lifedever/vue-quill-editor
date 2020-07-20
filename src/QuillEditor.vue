@@ -15,8 +15,8 @@
     import Quill from 'quill'
     import 'quill/dist/quill.core.css'
     import './style.less'
-    import ImageResize from 'quill-image-resize';
-
+    import ImageResize from './modules/imageResize/ImageResize';
+    Quill.register('modules/imageResize', ImageResize);
     export default {
         name: "QuillEditor",
         data() {
@@ -83,9 +83,11 @@
             }
         },
         watch: {
-            readOnly() {
-                if (this.quill) {
-                    this.quill.enable(!this.readOnly);
+            readOnly: {
+                handler(){
+                    if (this.quill) {
+                        this.quill.enable(!this.readOnly);
+                    }
                 }
             }
         },
@@ -107,7 +109,6 @@
                 }
             },
             initQuill() {
-                Quill.register('modules/imageResize', ImageResize);
                 let config = {
                     modules: {
                         toolbar: {
@@ -120,7 +121,6 @@
                     },
                     theme: 'snow',
                     placeholder: this.placeholder,
-                    readOnly: this.readOnly
                 }
                 this.quill = new Quill(this.$refs['editor'], config);
                 console.log('init quill config: ', config)
@@ -134,8 +134,12 @@
                 this.bindEvents();
 
                 console.log('editor container', this.quill.container)
-
+                // 设置 只读
+                setTimeout(_ => {
+                    this.quill.enable(!this.readOnly);
+                }, 300)
                 this.$nextTick(_ => {
+
                     // init toolbar style
                     this.$el.querySelector('.ql-toolbar.ql-snow').style.borderColor = this.borderColor
                 })

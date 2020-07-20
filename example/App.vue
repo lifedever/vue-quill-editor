@@ -8,7 +8,7 @@
                 <span v-if="!readOnly">非只读</span>
             </button>
             <button @click="callMethod('getText')">获取纯文本内容</button>
-            <button @click="callMethod('getContents')">获取文本内容</button>
+            <button @click="callMethod('getHtml')">获取html内容</button>
             <button @click="callMethod('getLength')">获取内容长度</button>
             <button @click="callMethod('blur')">失去焦点</button>
             <button @click="callMethod('focus')">获取焦点</button>
@@ -25,7 +25,6 @@
                                   ref="editor"
                                   :image="imageConfig"
                                   height="100"
-                                  :auto-height="false"
                                   v-model="item.text1">
                     </quill-editor>
                 </div>
@@ -36,7 +35,6 @@
                                   ref="editor1"
                                   :image="imageConfig"
                                   height="100"
-                                  :auto-height="false"
                                   v-model="item.text2">
                     </quill-editor>
                 </div>
@@ -47,7 +45,6 @@
                                   ref="editor2"
                                   :image="imageConfig"
                                   height="100"
-                                  :auto-height="false"
                                   v-model="item.text3">
                     </quill-editor>
                 </div>
@@ -72,15 +69,15 @@
         data() {
             return {
                 maxLength: undefined,
-                readOnly: false,
+                readOnly: true,
                 imageConfig: {
                     multiple: false,
                     serverUrl: 'http://localhost:12388/api/facade/open/general/edit/upload'
                 },
                 content: '',
                 item: {
-                    text1: '123',
-                    text2: '456',
+                    text1: '1234<img src="https://static.oschina.net/uploads/user/276/552167_50.jpg?t=1358392807000" />',
+                    text2: '',
                     text3: '789'
                 }
             }
