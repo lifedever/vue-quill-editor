@@ -86,7 +86,7 @@
             readOnly: {
                 handler(){
                     if (this.quill) {
-                        this.quill.enable(!this.readOnly);
+                        this.handleReadOnlyChange()
                     }
                 }
             }
@@ -136,7 +136,7 @@
                 console.log('editor container', this.quill.container)
                 // 设置 只读
                 setTimeout(_ => {
-                    this.quill.enable(!this.readOnly);
+                    this.handleReadOnlyChange()
                 }, 300)
                 this.$nextTick(_ => {
 
@@ -215,6 +215,14 @@
                     }
                     xhr.send(formData);
                 })
+            },
+            handleReadOnlyChange() {
+                this.quill.enable(!this.readOnly);
+                if (this.readOnly) {
+                    this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'none'
+                }else{
+                    this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'unset'
+                }
             },
             getEditor() {
                 return this.quill
