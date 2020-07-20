@@ -33,7 +33,7 @@
                     <quill-editor :read-only="readOnly"
                                   :max-length="maxLength"
                                   show-counter
-                                  ref="editor"
+                                  ref="editor1"
                                   :image="imageConfig"
                                   height="100"
                                   :auto-height="false"
@@ -44,7 +44,7 @@
                     <quill-editor :read-only="readOnly"
                                   :max-length="maxLength"
                                   show-counter
-                                  ref="editor"
+                                  ref="editor2"
                                   :image="imageConfig"
                                   height="100"
                                   :auto-height="false"
