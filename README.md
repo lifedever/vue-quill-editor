@@ -4,6 +4,12 @@ vue-quill-editor
 ```shell script
 yarn add @gefangshuai/vue-quill-editor
 ```
+
+```javascript
+    import QuillEditor from '@gefangshuai/vue-quill-editor'
+    import QuillEditor from '@gefangshuai/vue-quill-editor/lib/vueQuillEditor.css'
+
+```
 ```html
 <quill-editor :read-only="readOnly"
               ref="editor"

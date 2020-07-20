@@ -13,8 +13,6 @@
 
 <script>
     import Quill from 'quill'
-    import 'quill/dist/quill.core.css'
-    import './style.less'
     import ImageResize from './modules/imageResize/ImageResize';
     Quill.register('modules/imageResize', ImageResize);
     export default {
