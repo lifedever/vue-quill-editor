@@ -64,6 +64,7 @@
 <script>
 
     import QuillEditor from "../src/";
+    import '../src/style.less'
 
     export default {
         name: 'App',
