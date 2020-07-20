@@ -62,10 +62,12 @@
 </template>
 
 <script>
-
+    import QuillEditor from "../src/";
     export default {
         name: 'App',
-        components: {},
+        components: {
+            QuillEditor
+        },
         data() {
             return {
                 maxLength: undefined,
