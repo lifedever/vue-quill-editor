@@ -63,9 +63,13 @@
 
 <script>
 
+    import QuillEditor from "../src/";
+
     export default {
         name: 'App',
-        components: {},
+        components: {
+            QuillEditor
+        },
         data() {
             return {
                 maxLength: undefined,
@@ -95,7 +99,7 @@
             handleLimitCount() {
                 if (this.maxLength) {
                     this.maxLength = undefined
-                }else{
+                } else {
                     this.maxLength = 100
                 }
             }
