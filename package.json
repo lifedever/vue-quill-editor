@@ -1,7 +1,7 @@
 {
     "name": "@gefangshuai/vue-quill-editor",
-    "version": "1.0.25",
-    "main": "./lib/vueQuillEditor.common.js",
+    "version": "1.1.0",
+    "main": "./lib/vueQuillEditor.umd.min.js",
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build --target lib --name vueQuillEditor src/index.js",
