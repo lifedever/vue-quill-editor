@@ -70,7 +70,7 @@
         },
         data() {
             return {
-                maxLength: undefined,
+                maxLength: 20,
                 readOnly: false,
                 imageConfig: {
                     multiple: false,
