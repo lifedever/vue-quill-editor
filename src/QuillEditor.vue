@@ -205,7 +205,10 @@
                                 if (res.errno === 0) {
                                     resolve(res.data)
                                 }else {
-                                    alert(res.message)
+                                    if(this.imageConfig.error){
+                                        this.imageConfig.error(res)
+                                    }
+                                    resolve(res.data)
                                 }
                             } else {
                                 console.log(xhr)
