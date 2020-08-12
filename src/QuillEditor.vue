@@ -204,9 +204,12 @@
                                 console.log('upload success', res)
                                 if (res.errno === 0) {
                                     resolve(res.data)
+                                }else {
+                                    alert(res.message)
                                 }
                             } else {
-                                alert('图片上传失败！')
+                                console.log(xhr)
+                                alert(`图片上传失败！${xhr.responseText}`)
                                 reject(xhr.responseText)
                             }
                         }
