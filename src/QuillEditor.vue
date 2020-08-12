@@ -6,7 +6,7 @@
             <slot></slot>
         </div>
         <div v-if="showCounter" class="ql-counter-desc">
-            已输入 {{textLength}} 字
+            已输入 {{textLength}}<span v-if="maxLength">/{{maxLength}}</span> 字
         </div>
     </div>
 </template>
