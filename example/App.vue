@@ -84,6 +84,11 @@
                 }
             }
         },
+        mounted() {
+            setTimeout(_ => {
+                this.item.text2 = '1233444'
+            }, 1000)
+        },
         watch: {
             content() {
             }
