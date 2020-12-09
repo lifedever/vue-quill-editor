@@ -6,7 +6,7 @@
             <slot></slot>
         </div>
         <div v-if="showCounter" class="ql-counter-desc">
-            已输入 {{textLength}}<span v-if="maxLength">/{{maxLength}}</span> 字
+            已输入 {{ textLength }}<span v-if="maxLength">/{{ maxLength }}</span> 字
         </div>
     </div>
 </template>
@@ -14,6 +14,7 @@
 <script>
     import Quill from 'quill'
     import ImageResize from './modules/imageResize/ImageResize';
+
     Quill.register('modules/imageResize', ImageResize);
     export default {
         name: "QuillEditor",
@@ -37,6 +38,7 @@
             this.initQuill()
         },
         props: {
+            toolbarSticky: Number,
             borderColor: {
                 type: String,
                 default: '#eee'
@@ -82,7 +84,7 @@
         },
         watch: {
             readOnly: {
-                handler(){
+                handler() {
                     if (this.quill) {
                         this.handleReadOnlyChange()
                     }
@@ -137,10 +139,25 @@
                     this.handleReadOnlyChange()
                 }, 300)
                 this.$nextTick(_ => {
-
                     // init toolbar style
-                    this.$el.querySelector('.ql-toolbar.ql-snow').style.borderColor = this.borderColor
+                    this.$el.querySelector('.ql-toolbar').style.borderColor = this.borderColor
+                    this.setToolbarSticky()
+                    this.fixBugs()
                 })
+            },
+            fixBugs() {
+                this.$el.querySelector('.ql-toolbar').addEventListener('mousedown', e => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                })
+            },
+            setToolbarSticky() {
+                if (this.toolbarSticky) {
+                    let toolbar = this.$el.querySelector('.ql-toolbar')
+                    toolbar.style.position = 'sticky'
+                    toolbar.style.top = this.toolbarSticky + 'px'
+                    toolbar.style.zIndex = 1
+                }
             },
             bindEvents() {
                 this.quill.on('text-change', (delta, oldDelta, source) => {
@@ -204,8 +221,8 @@
                                 console.log('upload success', res)
                                 if (res.errno === 0) {
                                     resolve(res.data)
-                                }else {
-                                    if(this.imageConfig.error){
+                                } else {
+                                    if (this.imageConfig.error) {
                                         this.imageConfig.error(res)
                                     }
                                     resolve(res.data)
@@ -224,7 +241,7 @@
                 this.quill.enable(!this.readOnly);
                 if (this.readOnly) {
                     this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'none'
-                }else{
+                } else {
                     this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'unset'
                 }
             },
