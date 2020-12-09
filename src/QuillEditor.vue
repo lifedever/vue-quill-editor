@@ -87,7 +87,7 @@
                         this.handleReadOnlyChange()
                     }
                 }
-            }
+            },
         },
         computed: {
             style() {
