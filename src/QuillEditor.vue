@@ -21,6 +21,7 @@
         data() {
             return {
                 quill: undefined,
+                toolbarEl: undefined,
                 imageConfig: {
                     serverUrl: undefined,
                     fileName: 'file',
@@ -111,7 +112,7 @@
             initQuill() {
                 let config = {
                     modules: {
-                        toolbar: this.hideToolbar? false: {
+                        toolbar: this.hideToolbar ? false : {
                             container: this.toolbar,  // Selector for toolbar container
                             handlers: {
                                 'image': this.imageConfig.serverUrl ? this.handleImage : undefined
@@ -140,6 +141,7 @@
                 }, 300)
                 this.$nextTick(_ => {
                     // init toolbar style
+<<<<<<< HEAD
                     this.$el.querySelector('.ql-toolbar').style.borderColor = this.borderColor
                     this.setToolbarSticky()
                     this.fixBugs()
@@ -149,6 +151,12 @@
                 this.$el.querySelector('.ql-toolbar').addEventListener('mousedown', e => {
                     e.preventDefault()
                     e.stopPropagation()
+=======
+                    this.toolbarEl = this.$el.querySelector('.ql-toolbar.ql-snow')
+                    if (this.toolbarEl) {
+                        this.toolbarEl.style.borderColor = this.borderColor
+                    }
+>>>>>>> develop
                 })
             },
             setToolbarSticky() {
@@ -222,10 +230,14 @@
                                 if (res.errno === 0) {
                                     resolve(res.data)
                                 } else {
+<<<<<<< HEAD
                                     if (this.imageConfig.error) {
                                         this.imageConfig.error(res)
                                     }
                                     resolve(res.data)
+=======
+                                    alert(res.message)
+>>>>>>> develop
                                 }
                             } else {
                                 console.log(xhr)
@@ -239,10 +251,19 @@
             },
             handleReadOnlyChange() {
                 this.quill.enable(!this.readOnly);
+<<<<<<< HEAD
                 if (this.readOnly) {
                     this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'none'
                 } else {
                     this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'unset'
+=======
+                if (this.toolbarEl) {
+                    if (this.readOnly) {
+                        this.toolbarEl.style.pointerEvents = 'none'
+                    } else {
+                        this.toolbarEl.style.pointerEvents = 'unset'
+                    }
+>>>>>>> develop
                 }
             },
             getEditor() {
