@@ -6,7 +6,7 @@
             <slot></slot>
         </div>
         <div v-if="showCounter" class="ql-counter-desc">
-            已输入 {{textLength}}<span v-if="maxLength">/{{maxLength}}</span> 字
+            已输入 {{ textLength }}<span v-if="maxLength">/{{ maxLength }}</span> 字
         </div>
     </div>
 </template>
@@ -14,12 +14,14 @@
 <script>
     import Quill from 'quill'
     import ImageResize from './modules/imageResize/ImageResize';
+
     Quill.register('modules/imageResize', ImageResize);
     export default {
         name: "QuillEditor",
         data() {
             return {
                 quill: undefined,
+                toolbarEl: undefined,
                 imageConfig: {
                     serverUrl: undefined,
                     fileName: 'file',
@@ -83,7 +85,7 @@
         },
         watch: {
             readOnly: {
-                handler(){
+                handler() {
                     if (this.quill) {
                         this.handleReadOnlyChange()
                     }
@@ -110,7 +112,7 @@
             initQuill() {
                 let config = {
                     modules: {
-                        toolbar: this.hideToolbar? false: {
+                        toolbar: this.hideToolbar ? false : {
                             container: this.toolbar,  // Selector for toolbar container
                             handlers: {
                                 'image': this.imageConfig.serverUrl ? this.handleImage : undefined
@@ -138,9 +140,11 @@
                     this.handleReadOnlyChange()
                 }, 300)
                 this.$nextTick(_ => {
-
                     // init toolbar style
-                    this.$el.querySelector('.ql-toolbar.ql-snow').style.borderColor = this.borderColor
+                    this.toolbarEl = this.$el.querySelector('.ql-toolbar.ql-snow')
+                    if (this.toolbarEl) {
+                        this.toolbarEl.style.borderColor = this.borderColor
+                    }
                 })
             },
             bindEvents() {
@@ -205,7 +209,7 @@
                                 console.log('upload success', res)
                                 if (res.errno === 0) {
                                     resolve(res.data)
-                                }else {
+                                } else {
                                     alert(res.message)
                                 }
                             } else {
@@ -220,10 +224,12 @@
             },
             handleReadOnlyChange() {
                 this.quill.enable(!this.readOnly);
-                if (this.readOnly) {
-                    this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'none'
-                }else{
-                    this.$el.querySelector('.ql-toolbar').style.pointerEvents = 'unset'
+                if (this.toolbarEl) {
+                    if (this.readOnly) {
+                        this.toolbarEl.style.pointerEvents = 'none'
+                    } else {
+                        this.toolbarEl.style.pointerEvents = 'unset'
+                    }
                 }
             },
             getEditor() {
