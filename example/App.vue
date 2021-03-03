@@ -48,6 +48,17 @@
                                   v-model="item.text3">
                     </quill-editor>
                 </div>
+                <div>
+                    <quill-editor :read-only="readOnly"
+                                  :max-length="maxLength"
+                                  hide-toolbar
+                                  show-counter
+                                  ref="editor2"
+                                  :image="imageConfig"
+                                  height="100"
+                                  v-model="item.text4">
+                    </quill-editor>
+                </div>
             </div>
             <div style="flex: 1; padding-left: 10px;    word-break: break-all;" class="ql-container">
                 <p>第一个编辑器内容</p>
@@ -83,7 +94,8 @@
                 item: {
                     text1: '1234<img src="https://static.oschina.net/uploads/user/276/552167_50.jpg?t=1358392807000" />',
                     text2: '',
-                    text3: '789'
+                    text3: '789',
+                    text4: '隐藏编辑器工具栏'
                 }
             }
         },
