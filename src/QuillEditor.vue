@@ -39,6 +39,10 @@
         },
         props: {
             toolbarSticky: Number,
+            hideToolbar: {
+                type: Boolean,
+                default: false
+            },
             borderColor: {
                 type: String,
                 default: '#eee'
@@ -111,7 +115,7 @@
             initQuill() {
                 let config = {
                     modules: {
-                        toolbar: {
+                        toolbar: this.hideToolbar? false : {
                             container: this.toolbar,  // Selector for toolbar container
                             handlers: {
                                 'image': this.imageConfig.serverUrl ? this.handleImage : undefined
